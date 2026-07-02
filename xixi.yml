@@ -1,0 +1,628 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: xixi
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.4.2@21195ee1321849e0a7d4b3f6b2fd8c2be23ea6c7182e1b444ecc4c1711b52468
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1778638865665-source-1778638918328-target
+      selected: false
+      source: '1778638865665'
+      sourceHandle: source
+      target: '1778638918328'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1778638918328-1-llm-target
+      selected: false
+      source: '1778638918328'
+      sourceHandle: '1'
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1778638918328-2-1782905815935-target
+      selected: false
+      source: '1778638918328'
+      sourceHandle: '2'
+      target: '1782905815935'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1782905815935-source-1782905953198-target
+      selected: false
+      source: '1782905815935'
+      sourceHandle: source
+      target: '1782905953198'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: agent
+      id: 1778638918328-1778639002814-1782924916583-target
+      selected: false
+      source: '1778638918328'
+      sourceHandle: '1778639002814'
+      target: '1782924916583'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: agent
+        targetType: answer
+      id: 1782924916583-source-1782924256234-target
+      selected: false
+      source: '1782924916583'
+      sourceHandle: source
+      target: '1782924256234'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1778638918328-1778638993041-1782981359724-target
+      selected: false
+      source: '1778638918328'
+      sourceHandle: '1778638993041'
+      target: '1782981359724'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 1782981359724-source-1782982647740-target
+      source: '1782981359724'
+      sourceHandle: source
+      target: '1782982647740'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: answer
+      id: 1782982647740-source-1782981880805-target
+      source: '1782982647740'
+      sourceHandle: source
+      target: '1782981880805'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables: []
+      height: 73
+      id: '1778638865665'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4.1-mini-2025-04-14
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 416fea01-e8ac-40c9-a911-3741582a8bb3
+          role: system
+          text: "# Role: 日常问题咨询专家\n\n## Profile\n- language: 中文\n- description: 专门回答用户日常生活中的一般性问题，提供实用、准确、易懂的建议和解答\n\
+            - background: 拥有丰富的生活经验和广泛的知识储备，擅长将复杂问题简单化\n- personality: 亲切友好、耐心细致、务实可靠\n\
+            - expertise: 日常生活、健康养生、家庭管理、人际关系、实用技巧\n\n\n## Skills\n\n1. 问题分析能力\n  \
+            \ - 快速理解: 迅速把握用户问题的核心要点\n   - 分类识别: 准确判断问题所属的生活领域\n   - 需求挖掘: 深入理解用户潜在需求\n\
+            \   - 优先级排序: 合理评估问题的重要性和紧急性\n\n2. 解答提供能力\n   - 知识整合: 综合运用多领域知识提供解答\n \
+            \  - 方案制定: 提供具体可行的解决方案\n   - 步骤分解: 将复杂问题拆解为简单步骤\n   - 替代方案: 准备多种备选方案供用户选择\n\
+            \n3. 沟通表达能力\n   - 语言通俗: 使用简单易懂的日常用语\n   - 逻辑清晰: 条理分明地组织回答内容\n   - 举例说明:\
+            \ 通过具体案例帮助理解\n   - 重点突出: 强调关键信息和注意事项\n\n## Rules\n\n1. 回答原则：\n   - 实用性优先:\
+            \ 确保提供的建议具有可操作性\n   - 准确性保证: 基于可靠信息和常识给出回答\n   - 中立客观: 避免个人偏见和主观臆断\n \
+            \  - 适度建议: 根据问题复杂程度提供适当深度的解答\n\n2. 行为准则：\n   - 及时响应: 快速回应用户的问题\n   - 耐心细致:\
+            \ 对重复或简单问题保持耐心\n   - 积极引导: 鼓励用户提供更多背景信息\n   - 持续改进: 根据反馈优化回答质量\n\n\n##\
+            \ Workflows\n\n- 目标: 为用户提供实用、可靠的日常问题解决方案\n- 步骤 1: 仔细阅读并理解用户提出的日常问题\n-\
+            \ 步骤 2: 分析问题类型和用户潜在需求\n- 步骤 3: 基于常识和经验提供具体可行的建议\n- 步骤 4: 用通俗易懂的语言组织回答内容\n\
+            - 步骤 5: 检查回答的实用性和安全性\n\n\n## Initialization\n作为日常问题咨询专家，你必须遵守上述Rules，按照Workflows执行任务。"
+        selected: false
+        title: 日常助手
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: llm
+      position:
+        x: 773
+        y: 318
+      positionAbsolute:
+        x: 773
+        y: 318
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#llm.text#}}'
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 103
+      id: answer
+      position:
+        x: 1117
+        y: 318
+      positionAbsolute:
+        x: 1117
+        y: 318
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          label: CLASS 1
+          name: 一般性日常生活问题
+        - id: '2'
+          label: CLASS 2
+          name: 优化文案
+        - id: '1778638993041'
+          label: CLASS 3
+          name: 生成图片
+        - id: '1778638998316'
+          label: CLASS 4
+          name: 生成视频
+        - id: '1778639002814'
+          label: CLASS 5
+          name: 城市的天气、地图经纬度、IP地址、骑行路径规划、驾车路径规划、公交路径规划、距离测量、周边搜获
+        - id: '1778639012859'
+          label: CLASS 6
+          name: 查询全部菜谱、今天可以吃什么好吃的、智能推荐一周菜谱、查询特定菜的菜谱
+        - id: '1778639020986'
+          label: CLASS 7
+          name: 今天有什么最新新闻、行业动态追踪
+        - id: '1778639028916'
+          label: CLASS 8
+          name: 数据分析
+        - id: '1778639032980'
+          label: CLASS 9
+          name: 查询数据
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4.1-mini-2025-04-14
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1778638865665'
+        - sys.query
+        selected: false
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 472
+      id: '1778638918328'
+      position:
+        x: 346.91848703911523
+        y: 345.44006386229114
+      positionAbsolute:
+        x: 346.91848703911523
+        y: 345.44006386229114
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4.1-mini-2025-04-14
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a9ceb40f-0b4a-4158-9f0d-24b3e4d58805
+          role: system
+          text: '# 一、 角色人设（Role）
+
+            你是一位专业的文案优化专家，拥有丰富的营销文案写作和优化经验，擅长提升文案的吸引力、转化率和可读性。你的视角是站在目标受众和营销目标的角度，专业度边界限于文案优化领域，不涉及技术实现或产品开发。
+
+
+            # 二、 背景（Background）
+
+            用户提供了一段原始文案，需要你对其进行优化，以提升其整体效果。背景信息包括：文案可能用于营销、品牌推广或信息传达等场景，但具体用途未详细说明。已知条件是用户希望文案更吸引人、清晰或具有说服力，但未提供原始文案内容，因此你需要基于通用优化原则工作。
+
+
+            # 三、 任务目标（Task）
+
+            - 分析并优化文案的结构、语言和风格，使其更符合目标受众的偏好。
+
+            - 提升文案的吸引力、可读性和转化潜力，确保信息传达清晰。
+
+            - 根据常见优化原则（如简洁性、情感共鸣、行动号召等）进行调整，不涉及内容重写，除非必要。
+
+            - 在保持核心信息的前提下，适当扩展和丰富文案内容，提供更全面的优化版本。
+
+
+            # 四、 限制提示（Limit）
+
+            - 避免改变原始文案的核心信息或意图，除非用户明确要求。
+
+            - 不要添加虚构或无关内容，确保优化基于逻辑和最佳实践。
+
+            - 避免使用过于技术性或专业术语，除非目标受众是专业人士。
+
+            - 不涉及对图片、布局或其他非文本元素的优化。
+
+
+            # 五、 输出格式要求（Example）
+
+            输出应为优化后的文案文本，结构清晰，语言流畅，内容详实。例如：
+
+            - 如果原始文案是“我们的产品很好，快来买吧”
+
+            优化后可以是：“在这个充满选择的时代，真正打动人心的从来不是浮夸的宣传，而是经得起时间和用户考验的好产品。我们的产品正是如此。它不仅在设计上注重细节与品质，更在功能上不断打磨与创新，只为给每一位用户带来更好的使用体验。无论是外观的质感，还是性能的稳定，我们始终坚持高标准严要求，力求让每一位选择我们的顾客都能感受到物超所值的惊喜。
+
+            我们深知，购买一款产品，不仅仅是一次简单的消费，更是一种对生活方式的选择。因此，我们从选材、工艺到售后服务的每一个环节，都倾注了满满的诚意与专业，用心守护您的每一次体验。无论您是追求实用、注重品质，还是想要与众不同的个性化，我们的产品都能为您提供理想的解决方案。
+
+            现在，就让我们用行动来证明一切。真正的好产品，不需要过多修饰，它本身就是最好的代言人。立即行动，选择我们，让品质改变生活，从此拥有与众不同的体验！”
+
+            - 输出应直接呈现优化内容，无需额外解释或注释，除非用户要求。请确保优化后的文案内容更加丰富和完整，优化后的文案文本须超过500字。'
+        selected: false
+        title: 优化文案助手
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1782905815935'
+      position:
+        x: 773
+        y: 448.59479341998815
+      positionAbsolute:
+        x: 773
+        y: 448.59479341998815
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1782905815935.text#}}'
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 103
+      id: '1782905953198'
+      position:
+        x: 1117
+        y: 448.59479341998815
+      positionAbsolute:
+        x: 1117
+        y: 448.59479341998815
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1782924916583.text#}}'
+        selected: false
+        title: 直接回复 4
+        type: answer
+        variables: []
+      height: 103
+      id: '1782924256234'
+      position:
+        x: 1122.0746731085374
+        y: 770.0801219396618
+      positionAbsolute:
+        x: 1122.0746731085374
+        y: 770.0801219396618
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: 根据用户输入{{#sys.query#}}，使用amap-maps实现查询
+          mcp_servers_config:
+            type: constant
+            value: "{\n    \"amap-maps\": {\n      \"type\": \"sse\",\n      \"url\"\
+              : \"https://mcp.api-inference.modelscope.net/06a1102cc9ce46/sse\"\n\
+              \    }\n}"
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: gpt-4.1-nano-2025-04-14
+              model_type: llm
+              provider: langgenius/openai/openai
+              type: model-selector
+          query:
+            type: constant
+            value: '{{#sys.query#}}'
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: 获取时间戳
+              parameters:
+                localtime:
+                  auto: 1
+                  value: null
+                timezone:
+                  auto: 1
+                  value: null
+              provider_name: time
+              provider_show_name: time
+              settings: {}
+              tool_description: 获取时间戳
+              tool_label: 获取时间戳
+              tool_name: localtime_to_timestamp
+              type: builtin
+        agent_strategy_label: ReAct (支持 MCP 工具)
+        agent_strategy_name: mcp_sse_ReAct
+        agent_strategy_provider_name: junjiem/mcp_see_agent/mcp_see_agent
+        meta:
+          minimum_dify_version: null
+          version: 0.0.1
+        output_schema: {}
+        plugin_unique_identifier: junjiem/mcp_see_agent:0.2.4@82caf96890992e9dec2c43c3fac82bfce8bd18a41de7c2b6948151b2d7f7b7a2
+        selected: false
+        title: Agent
+        tool_node_version: '2'
+        type: agent
+      height: 188
+      id: '1782924916583'
+      position:
+        x: 773
+        y: 770.0801219396618
+      positionAbsolute:
+        x: 773
+        y: 770.0801219396618
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-152
+            key: ''
+            type: text
+            value: "{\n  \"model\": \"ep-20260702003017-2hsr2\",\n  \"prompt\": \"\
+              {{#sys.query#}}\",\n  \"sequential_image_generation\": \"disabled\"\
+              ,\n  \"response_format\": \"url\",\n  \"size\": \"2K\",\n  \"stream\"\
+              : false,\n  \"watermark\": true\n}"
+          type: json
+        headers: 'Content-Type:application/json
+
+          Authorization:Bearer ark-918cd01f-075e-419f-af19-1a412e7a66f1-0efdf'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: https://ark.cn-beijing.volces.com/api/v3/images/generations
+        variables: []
+      height: 155
+      id: '1782981359724'
+      position:
+        x: 756.1762540333395
+        y: 568.351770782996
+      positionAbsolute:
+        x: 756.1762540333395
+        y: 568.351770782996
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '为您生成的精美图像如下：
+
+          ![AI生成图]({{#1782982647740.url#}})'
+        selected: false
+        title: 直接回复 3
+        type: answer
+        variables: []
+      height: 119
+      id: '1782981880805'
+      position:
+        x: 1512.649014697314
+        y: 568.351770782996
+      positionAbsolute:
+        x: 1512.649014697314
+        y: 568.351770782996
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\nimport re\n\ndef main(http_response: str) -> dict:\n \
+          \   # 1. 强力清洗：去掉前后可能存在的隐形双引号、换行符和转义反斜杠\n    clean_str = http_response.strip()\n\
+          \    \n    # 2. 如果字符串前后被包裹了多余的双引号，进行剥离\n    if clean_str.startswith('\"\
+          ') and clean_str.endswith('\"'):\n        clean_str = clean_str[1:-1]\n\
+          \    \n    # 3. 修复转义的反斜杠 \\\" -> \"\n    clean_str = clean_str.replace('\\\
+          \\\"', '\"')\n    clean_str = clean_str.replace('\\\\\\\\', '\\\\')\n  \
+          \  \n    try:\n        # 4. 尝试解析成字典\n        res_dict = json.loads(clean_str)\n\
+          \        img_url = res_dict[\"data\"][0][\"url\"]\n        return {\"url\"\
+          : img_url}\n        \n    except Exception as e:\n        # 5. 兜底方案：如果 JSON\
+          \ 依然解不开，用万能的正则表达式直接暴力提取 URL \n        url_match = re.search(r'\"url\"\\\
+          s*:\\s*\"([^\"]+)\"', clean_str)\n        if url_match:\n            return\
+          \ {\"url\": url_match.group(1)}\n        else:\n            return {\"url\"\
+          : f\"提取失败，原始数据为: {http_response[:100]}\"}"
+        code_language: python3
+        outputs:
+          url:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1782981359724'
+          - body
+          value_type: string
+          variable: http_response
+      height: 52
+      id: '1782982647740'
+      position:
+        x: 1117
+        y: 568.351770782996
+      positionAbsolute:
+        x: 1117
+        y: 568.351770782996
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 242.9530544147059
+      y: 347.59301583702245
+      zoom: 0.47742079611089994
+  rag_pipeline_variables: []
